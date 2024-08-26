@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.5.1
+  fluttertoast: ^8.2.8
   freezed: ^2.5.2
   mobile_scanner: ^5.2.1
   riverpod_annotation: ^2.3.5

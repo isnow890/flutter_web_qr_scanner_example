@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_qr_scanner_example/scanned_barcode_label.dart';
 import 'package:flutter_web_qr_scanner_example/scanner_button_widgets.dart';
 import 'package:flutter_web_qr_scanner_example/scanner_error_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class BarcodeScannerScreen extends ConsumerStatefulWidget {
@@ -19,7 +20,7 @@ class _BarcodeScannerScreenState extends ConsumerState<BarcodeScannerScreen>
     with WidgetsBindingObserver {
   final MobileScannerController controller = MobileScannerController(
     autoStart: false,
-    torchEnabled: true,
+    torchEnabled: false,
     useNewCameraSelector: true,
   );
 
@@ -99,28 +100,25 @@ class _BarcodeScannerScreenState extends ConsumerState<BarcodeScannerScreen>
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Scanner with Overlay Example app'),
+        title: const Text('scanner test'),
       ),
       body: Stack(
         fit: StackFit.expand,
         children: [
           Center(
             child: MobileScanner(
-              fit: BoxFit.contain,
+              onDetect: (barcodes) {
+                Fluttertoast.showToast(
+                    msg: "${barcodes.barcodes[0].displayValue}",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              },
               controller: controller,
-              scanWindow: scanWindow,
-              errorBuilder: (context, error, child) {
-                return ScannerErrorWidget(error: error);
-              },
-              overlayBuilder: (context, constraints) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: ScannedBarcodeLabel(barcodes: controller.barcodes),
-                  ),
-                );
-              },
+              // ... 기존 설정 ...
             ),
           ),
           ValueListenableBuilder(
@@ -136,6 +134,13 @@ class _BarcodeScannerScreenState extends ConsumerState<BarcodeScannerScreen>
                 painter: ScannerOverlay(scanWindow: scanWindow),
               );
             },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: ScannedBarcodeLabel(barcodes: controller.barcodes),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,

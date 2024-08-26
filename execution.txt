@@ -1,4 +1,15 @@
+
+--모바일 핫로드
 flutter run -d web-server --web-hostname 0.0.0.0 --web-port 8080
 
+--빌드
+ flutter build web --release --web-renderer canvaskit --no-tree-shake-icons
 
+
+flutter build web --profile --dart-define=Dart2jsOptimization=O0
+
+--ngrok 테스트
 ngrok 8080 
+
+
+https://github.com/juliansteenbakker/mobile_scanner/issues/288
