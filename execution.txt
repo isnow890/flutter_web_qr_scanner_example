@@ -13,3 +13,6 @@ ngrok 8080
 
 
 https://github.com/juliansteenbakker/mobile_scanner/issues/288
+
+
+https://medium.com/@robyeatesuk/flutter-building-a-qr-code-scanner-for-web-android-ios-267429dfe2ff

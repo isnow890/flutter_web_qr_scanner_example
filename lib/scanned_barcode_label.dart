@@ -18,14 +18,14 @@ class ScannedBarcodeLabel extends StatelessWidget {
 
         if (scannedBarcodes.isEmpty) {
           return const Text(
-            'Scan something!?????',
+            '스캔해보세요!',
             overflow: TextOverflow.fade,
             style: TextStyle(color: Colors.white),
           );
         }
 
         return Text(
-          scannedBarcodes.first.displayValue ?? 'No display value.',
+          "스캔 값 :${scannedBarcodes.first.displayValue ?? 'No display value.'}",
           overflow: TextOverflow.fade,
           style: const TextStyle(color: Colors.white),
         );
