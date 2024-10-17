@@ -1,6 +1,7 @@
 # flutter_web_qr_scanner_example
 
-A new Flutter project.
+flutter web으로 바코드를 스캔하는 기능 간단하게 예제로 생성
+나중에 써먹을라고
 
 ## Getting Started
 
